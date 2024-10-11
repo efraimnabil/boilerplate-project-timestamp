@@ -18,6 +18,18 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get("/api/whoami", function(req, res){
+  const ipAddress = req.ip;
+  const language = req.headers['accept-language'].split(',')[0];
+  const software = req.headers['user-agent'];
+
+  res.json({
+    ipaddress: ipAddress,
+    language: language,
+    software: software
+  })
+})
+
 app.get("/api/:date?", function (req, res) {
   let dateParam = req.params.date;
 
